@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Psychic-Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    
+    <h1>The Phenomenal Psychic Game!!!</h1>
+    <br>
+
+
+    <h2 >Guess what letter between (a and z) I'm thinking of</h2>
+    <h2 class="Wins">Wins: <span id="ws">0</span></h2>
+    <h2 class="Losses">Losses: <span id="ls">0</span></h2>
+    <h2 class="gsLeft">Your Guesses so far: <span id="gQuant">10</span></h2>
+    <h2 class="gletter">Guesses Left: <span class="" id="ltrGuess"></span></h2>
+
+<!-- <script type="text/javascript" src="/Users/ericthornton/gt/Psychic-Game/assets/javascript/game.js"></script> -->
+
+<script type="text/javascript">
+alert("Welcome to The Phenomenal Psychic Game!?!?");
+
+
+var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var guessedLetter = [];
+                  
+var win = 0;
+var loss = 0;                
+var scores = [0,0];
+var guessLeft = 15;
+
+var letterGuess = null;
+
+
+
+
+
+var runRandomLetter = function(){
+    letterGuess = letters[Math.floor(Math.random() * letters.length)];
+};
+
+var runGuessSoFar = function(){ document.querySelector("#ltrGuess").innerHTML = guessLeft;
+};
+
+var runGuessLeft = function(){ document.querySelector("#gQuant").innerHTML = guessedLetter.join(", ");
+};
+
+
+
+var gameReset = function(){
+    guessLeft = 15;
+    guessedLetter = [];
+    runRandomLetter();
+    runGuessSoFar();
+    runGuessLeft();
+};
+
+runRandomLetter();
+runGuessLeft();
+
+document.onkeyup = function(event){
+    guessLeft--;
+    var guess;
+    if (event.keyCode >= 65 && event.keyCode <= 90){
+        guess = event.key;
+        if (guess === letterGuess) {
+        win++;
+        document.querySelector("#ws").innerHTML = win;
+
+        gameReset();
+        }
+        else if (guessLeft === 0) {
+        loss++;
+        document.querySelector("#ls").innerHTML = loss;
+
+        gameReset();
+        }
+        
+        
+        }
+    
+    console.log(guess); 
+    guessedLetter.push(guess);
+    runGuessLeft();
+    runGuessSoFar();
+
+
+    
+    }
+
+    
+
+
+</script>
+
+</body>
+</html>
